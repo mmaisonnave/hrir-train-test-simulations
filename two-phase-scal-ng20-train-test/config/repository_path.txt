@@ -1,0 +1,1 @@
+/home/ec2-user/SageMaker/mariano/repositories/train-test-split/two-phase-scal-ng20-train-test
