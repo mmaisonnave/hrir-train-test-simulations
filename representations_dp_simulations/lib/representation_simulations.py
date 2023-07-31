@@ -11,7 +11,8 @@ import sys
 
 with open('../config/repository_path.txt', 'r') as reader:
     repository_path = reader.read().strip()
-    
+EMBEDDING_PATH = '../../embeddings/dp/'
+
 sys.path.append(repository_path)
 
 from lib.dataset import DatasetDP,DataItemDP
@@ -57,11 +58,11 @@ if __name__=='__main__':
 
     representation=args.representation
     if representation == 'bow':
-        representation_file = os.path.join(repository_path, 'embeddings', 'item_representation_tfidf.pickle')
+        representation_file = os.path.join(EMBEDDING_PATH, 'item_representation_tfidf.pickle')
     elif representation == 'glove':
-        representation_file = os.path.join(repository_path, 'embeddings', 'item_representation_glove.pickle')
+        representation_file = os.path.join(EMBEDDING_PATH, 'item_representation_glove.pickle')
     else:
-        representation_file = os.path.join(repository_path, 'embeddings', 'item_representation_sentence_bert.pickle')
+        representation_file = os.path.join(EMBEDDING_PATH, 'item_representation_sentence_bert.pickle')
     
     with open(representation_file, 'rb') as reader:
         representations = pickle.load(reader)

@@ -9,6 +9,7 @@ import pickle
 import sys
 repository_path=open('/home/ec2-user/SageMaker/mariano/repositories/train-test-split/two-phase-scal-ng20-train-test/config/repository_path.txt','r').read()
 sys.path.append(repository_path)
+EMBEDDING_PATH = '../../embeddings/dp/'
 
 from lib.dataset import Dataset20NG,DataItem20NG
 from lib.scal import SCAL20NG
@@ -59,11 +60,11 @@ if __name__=='__main__':
 #     representations = Dataset20NG.get_20newsgroup_representations(type_=representation) # CHANGE <<<<<<<<<
     #     representations = DatasetDP.get_DP_representations(type_=representation) # CHANGE <<<<<<<<<
     if representation == 'bow':
-        representation_file = os.path.join(repository_path, 'embeddings', 'item_representation_tfidf.pickle')
+        representation_file = os.path.join(EMBEDDING_PATH, 'item_representation_tfidf.pickle')
     elif representation == 'glove':
-        representation_file = os.path.join(repository_path, 'embeddings', 'item_representation_glove.pickle')
+        representation_file = os.path.join(EMBEDDING_PATH, 'item_representation_glove.pickle')
     else:
-        representation_file = os.path.join(repository_path, 'embeddings', 'item_representation_sentence_bert.pickle')
+        representation_file = os.path.join(EMBEDDING_PATH, 'item_representation_sentence_bert.pickle')
     
     with open(representation_file, 'rb') as reader:
         representations = pickle.load(reader)
