@@ -66,6 +66,9 @@ if __name__=='__main__':
     with open(representation_file, 'rb') as reader:
         representations = pickle.load(reader)
     
+    if representation == 'bow':
+        representations = {key:representations[key].toarray() for key in representations}
+
     representations = {str(id_):representations[id_] for id_ in representations}
     
     oracle = Dataset20NG.get_20newsgroup_oracle(category=args.category)    
