@@ -4,6 +4,7 @@
 import pandas as pd
 import numpy as np
 import os
+import pickle
 
 import sys
 repository_path=open('/home/ec2-user/SageMaker/mariano/repositories/train-test-split/two-phase-scal-ng20-train-test/config/repository_path.txt','r').read()
@@ -53,10 +54,23 @@ if __name__=='__main__':
     args = parser.parse_args()
     
 
-
+    # BEGIN REPRESENTATIONS
     representation=args.representation
-    representations = Dataset20NG.get_20newsgroup_representations(type_=representation) # CHANGE <<<<<<<<<
+#     representations = Dataset20NG.get_20newsgroup_representations(type_=representation) # CHANGE <<<<<<<<<
+    #     representations = DatasetDP.get_DP_representations(type_=representation) # CHANGE <<<<<<<<<
+    if representation == 'bow':
+        representation_file = os.path.join(repository_path, 'embeddings', 'item_representation_tfidf.pickle')
+    elif representation == 'glove':
+        representation_file = os.path.join(repository_path, 'embeddings', 'item_representation_glove.pickle')
+    else:
+        representation_file = os.path.join(repository_path, 'embeddings', 'item_representation_sentence_bert.pickle')
     
+    with open(representation_file, 'rb') as reader:
+        representations = pickle.load(reader)
+    
+    representations = {str(id_):representations[id_] for id_ in representations}
+    # END REPRESENTATIONS
+    # END REPRESENTATIONS
     category = args.category
     
     oracle = Dataset20NG.get_20newsgroup_oracle(category=category)    
