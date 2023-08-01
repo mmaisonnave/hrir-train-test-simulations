@@ -20,8 +20,8 @@ echo STARTING SIMULATION ...
 # NO_OF_SEEDS=3
 MODEL_TYPE=logreg
 REPRESENTATION=sbert
-#         5% 10%  20%  25%  50%  75% 100%
-for N in 291 583 1165 1456 2913 4369 5825
+#         5%  10%  20%  25%  50%   75%  100%
+for N in 753 1506 3012 3766 7531 11297 15062
 do
     for n in 1 3 5 10 20
     do
